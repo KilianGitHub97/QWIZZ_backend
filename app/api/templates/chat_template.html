@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>{% if pdf_title %}{{ pdf_title }}{% else %}PDF{% endif %}</title>
+    <style type="text/css">
+        body {
+            font-weight: 200;
+            font-size: 14px;
+        }
+
+        .header {
+            font-size: 20px;
+            font-weight: 100;
+            text-align: center;
+            color: #007cae;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 100;
+            /* text-align: right;*/
+            padding: 10px 20px 0px 20px;
+        }
+
+        .title span {
+            color: #007cae;
+        }
+
+        .hrItem {
+            border: none;
+            height: 1px;
+            /* Set the hr color */
+            color: #333;
+            /* old IE */
+            background-color: #fff;
+            /* Modern Browsers */
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-row {
+            flex-direction: row;
+        }
+
+        .bg-secondary {
+            background-color: #E7E7FE;
+        }
+
+        .w-full {
+            width: 100%
+        }
+
+       
+
+        .bg-black {
+            background-color: black;
+        }
+
+        .p-2 {
+            padding: 1.5em;
+        }
+        .pl-2 {
+            padding-left: 1.5em;
+        }
+
+        .text-white {
+            color: white;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .font-bold {
+            font-weight: bold;
+        }
+
+        .item-center {
+            display: flex;
+            align-items: center;
+        }
+
+        .ml-2 {
+            margin-left: 0.2em;
+        }
+        .pt-2 {
+            padding-top: 0.2em;
+        }
+
+        .bg-human {
+            background-color: #F6F6FE;
+        }
+
+        .vertical-center {
+            vertical-align: middle;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+        .h-full{
+            height:100%;
+        }
+    </style>
+</head>
+
+<body>
+    <main class='wrapper '>
+        <div class='header'>
+            <p class='title'>Chat:{{chat_name}} </p>
+        </div>
+        <div>
+
+            {% for msg in serializer %}
+                {% if msg.msg_type == True %}
+                <div class='flex bg-secondary flex-row p-2 item-center'>
+                    <div class=" pl-2 pt-2 text-black  font-bold ml-2 ">Bot:</div>
+                    <div class=" pl-2 pt-2 items-center flex-col w-full  ml-2" >{{msg.content}}</div>
+                    <div class=" pl-2 pt-2 w-full items-center flex-col  ml-2" >Sources:</div>
+                    <ul class=" pl-2 pt-2 w-full items-center flex-col  ml-2 ">
+                {% for doc in msg.selected_docs %}
+                <li class="w-full">
+                    <a class=" w-full  " href="{{doc.file}}">{{doc.name}}</a>
+                </li>
+                    
+                  
+                {% endfor %}
+                    </ul>
+            </div>
+                    
+                    
+                </div>
+                {% else %}
+                <div class='flex bg-human flex-row p-2 item-center'>
+                    <div class=" pl-2 pt-2 text-black font-bold ml-2 ">User:</div>
+                    <div class="pl-2 pt-2 items-center flex-col w-full  ml-2">{{msg.content}}</div>
+
+                    <div class=" pl-2 pt-2 w-full items-center flex-col  ml-2" >Selected Files:</div>
+                        <ul class=" pl-2 pt-2 w-full items-center flex-col  ml-2 ">
+                    {% for doc in msg.selected_docs %}
+                    <li class="w-full">
+                        <a class=" w-full  " href="{{doc.file}}">{{doc.name}}</a>
+                    </li>
+                        
+                      
+                    {% endfor %}
+                        </ul>
+                </div>
+
+                   
+                </div>
+    
+                {% endif %}
+
+
+            {% endfor %}
+
+        </div>
+</body>
+
+</html>

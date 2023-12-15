@@ -1,0 +1,31 @@
+Reporter: Today, we will speak with a computer science student from University of Zurich who is harnessing cutting-edge technology to revolutionize the process of analysing interview data for their master's thesis research. Can you share more about the tool you have developed with your fellow students? 
+
+Student: Certainly. The tool is called Qwizz. It was developed in 2023 as a prototype, primarily utilizing large language models and retrieval augmentation to facilitate qualitative interview analysis. This project was conceived under the supervision of Mateusz Dolata, a postdoc in the Information Management Research Group at the University of Zurich. 
+
+Reporter: Could you briefly explain how Qwizz works? 
+
+Student: Absolutely. Qwizz employs a technique known as retrieval augmented generation. It starts by retrieving pertinent passages from the interview transcripts, all of which are stored within the vector database. This retrieval of context is vital to ensure that the generated text is rich and insightful. Users have the flexibility to customize various settings, such as adjusting the creativity level of the model, choosing between GTP 3.5 and GTP 4, and setting the desired length of the generated analysis. 
+
+Reporter: Could you please provide some more technical details? How does it work exactly? 
+
+Student: Qwizz offers users the capability to create projects, encompassing chats, notes, and documents. This project structure aids in segregating different threads of ideas, preventing information from becoming entangled. Once the interview data is uploaded, it gets stored within Pinecone, a vector database. During this storage process, the text passages are embedded. 
+When a user poses a question, the tool assesses the question and selects the most appropriate tool to provide an answer. This evaluation is carried out by a Haystack agent. Haystack Agents utilize Large Language Models (LLMs) to handle intricate tasks. You can integrate Haystack Agents into your pipelines and employ a prompt-defined control to determine the most suitable tool or pipeline for your specific task. These agents can then discern which tools are best suited to answer the query and call them sequentially to generate a response. The tools are constructed using various Haystack components, enabling them to deliver responses. For instance, if a user inquires, "What is XY," the agent will select a tool that retrieves the most relevant passages and constructs an answer based on the retrieved documents. To retrieve the most relevant passages, we use embeddings. Conversely, if the user asks to "compare what different people say about XY," the agent will opt for a tool that retrieves the most relevant passages from each interviewee and, in a second step, compare the responses from each interviewee. This two-step approach ensures comprehensive and accurate answers to complex questions. 
+
+Reporter: Which frameworks did you use for your project: 
+
+Student: We used Django for the backend framework which provides helpful tools and libraries for web development, and ReactJS for the frontend to build a fast, interactive UI with composable components and declarative state management. These complementary technologies enabled quick development of a full-stack web application. Haystack was used as an orchestration tool. 
+
+Reporter: How has incorporating Qwizz into your research process impacted your work? 
+
+Student: The integration of Qwizz into my research process has had a profound effect on the efficiency and depth of my data analysis. While there are cases where manual coding remains necessary, Qwizz has significantly streamlined various aspects of my work, making the entire process more expedient and insightful. 
+Qwizz has brought a remarkable acceleration to my analysis process, reducing the time it takes to generate initial analyses from hours or even days to mere minutes. This newfound speed has allowed me to iterate quickly, offering more time for the crucial tasks of interpretation and contextualization of the themes uncovered by Qwizz. 
+It's also worth noting that Qwizz is not just a time-saver; it's an invaluable tool for managing large-scale datasets efficiently. However, it's important to acknowledge that, like any tool, Qwizz has its limitations. While it minimizes human bias and detects themes that could easily be overlooked manually, there are certain aspects of the analysis that may still require a human touch and manual review.  
+
+Reporter: Can you give some examples of these limitations? 
+
+Student: It's crucial to acknowledge that, while Qwizz offers significant benefits, it doesn't completely supplant human analysis. Qualitative analysis necessitates human judgment and expertise, particularly in formulating insightful research questions, interpreting subtle findings, and ensuring accurate contextual understanding. These facets demand a baseline understanding of the subject matter that a machine may lack. 
+Moreover, the issue of privacy warrants careful consideration. The Pinecone server, located in Singapore, and data sharing with OpenAI raise concerns, especially when dealing with sensitive data that has not been effectively anonymized. The current prototype might not be the optimal choice for such situations, highlighting the need for data security and privacy safeguards when using Qwizz in research processes. 
+
+Reporter: Any closing thoughts on the future of this technology? 
+
+Student: We're only beginning to scratch the surface of what's possible. As models like GPT-4 continue to evolve, this technology has the potential to revolutionize fields such as social sciences that heavily rely on qualitative data. It makes large-scale mixed methods studies much more feasible, promising exciting possibilities for researchers. Overall, it's a truly exciting time to be engaged in this area of research! 

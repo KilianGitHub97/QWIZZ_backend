@@ -1,0 +1,32 @@
+version: '3.11'
+
+services:
+  app:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "443:443"
+    environment:
+      - DEBUG=0
+      - SECRET_KEY=django-insecure-g-ezjlgj-%+#4dex66^cp5@*!3+4vlgrcj*=%epmmll)fhvysf
+      - POSTGRES_HOST=qwizz-db-do-user-14598736-0.b.db.ondigitalocean.com
+      - POSTGRES_NAME=defaultdb
+      - POSTGRES_PORT=25060
+      - POSTGRES_USER=doadmin
+      - POSTGRES_PASSWORD=AVNS_69SqztZ1xRMRhq_XMyu
+      - SESSION_COOKIE_SAMESITE=None
+      - CSRF_COOKIE_SAMESITE=None
+      - PINECONE_API_KEY=bbbf8dc4-09d1-41d8-a84c-0b111b2a02f4
+      - HUGGINGFACE_API_KEY=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
+      - OPENAI_API_KEY_1=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
+      - OPENAI_API_KEY_2=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
+      - OPENAI_API_KEY_3=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
+      - DJANGO_SUPERUSER_EMAIL=masterproject2023@gmail.com
+      - DJANGO_SUPERUSER_USERNAME= masterproject2023
+      - DJANGO_SUPERUSER_PASSWORD=HelloW0rld_2023
+      - AWS_ACCESS_KEY_ID=AKIAWEENXXWZ2OXPLXU5
+      - AWS_SECRET_ACCESS_KEY=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
+    command: sh -c "python manage.py makemigrations --noinput && python manage.py migrate --noinput && python manage.py createsuperuser2 --noinput --preserve && gunicorn -c /app/gunicorn.conf.py app.wsgi:application"  
+

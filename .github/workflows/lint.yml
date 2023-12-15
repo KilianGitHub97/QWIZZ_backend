@@ -1,0 +1,46 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.11"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install black coverage flake8 isort mypy poetry
+        if [ -f pyproject.toml ]; then poetry install; fi
+    - name: Lint with flake8
+      run: |
+        # stop the build if code is not nicely formatted
+        black . --line-length 79 --check 
+        # migrate existing code to static typing. Stop build if wronlgy typed
+        mypy . --ignore-missing-imports
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=79 --statistics --exclude=migrations --ignore=W291
+        # stop the build if imports are not sorted alphabetically and separated in sections
+        # and types
+        isort . --check-only --profile black --line-length 79
+
+
+        
